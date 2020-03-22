@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			#drawing {
+				border: 1px solid #ccc;
+				position: absolute;
+				width: 100%;
+				height: 100%;
+			}
+			.static {
+				cursor: not-allowed;
+			}
+			.draggable {
+				cursor: move;
+			}
+		</style>
+	</head>
+	<body>
+		<button id="enablePainting">Paint</button>
+		<div id="drawing"></div>
+		Shape:
+		<select id="shape">
+			<option value="mouse paint">Mouse paint</option>
+			<option value="rect">Recangle</option>
+			<option value="ellipse">Circle</option>
+		</select>
+		Color:
+		<select id="color">
+			<option value="#ff0099">Pink</option>
+			<option value="#f3f313">Yellow</option>
+			<option value="#0dd5fc">Blue</option>
+			<option value="#83f52c">Green</option>
+		</select>
+	</body>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/2.6.3/svg.min.js"></script>
+	<script type="text/javascript" src="./draggable.js"></script>
+	<script type="text/javascript" src="./svg.draw.js"></script>
+	<script type="text/javascript" src="./main.js"></script>
+</html>
