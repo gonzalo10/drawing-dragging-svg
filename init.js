@@ -49,7 +49,9 @@ function createDiv(id, style) {
 const shapeOptions = {
 	'mouse paint': 'Mouse paint',
 	rect: 'Rectangle',
-	ellipse: 'Circle'
+	ellipse: 'Circle',
+	line: 'Line',
+	dark_square: 'dark square'
 };
 const colorOptions = {
 	'#ff0099': 'Pink',
@@ -73,6 +75,7 @@ function createDropdown(id, options) {
 function createPanel() {
 	var body = document.getElementsByTagName('BODY')[0];
 	const button = createButton('Paint', 'enablePainting');
+	const comment = createButton('Comment', 'btn-comment');
 	const div = createDiv('drawing', drawingStyles);
 	const shape = createDropdown('shape', shapeOptions);
 	const color = createDropdown('color', colorOptions);
@@ -80,6 +83,7 @@ function createPanel() {
 	body.appendChild(div);
 	body.appendChild(shape);
 	body.appendChild(color);
+	body.appendChild(comment);
 }
 
 function applyGlobalStyles() {
