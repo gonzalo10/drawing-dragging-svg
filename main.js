@@ -61,7 +61,6 @@ draw.on('mouseup', event => {
 	}
 	console.log('event', event);
 	console.log(getDrawObject());
-	console.log(document.getElementById(' '));
 	index++;
 });
 
