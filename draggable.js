@@ -1,11 +1,22 @@
+let selectedElementId;
+var selectedElement, offset;
 function makeDraggable(evt) {
-	console.log('startdrag', evt);
-	var selectedElement, offset;
 	var svg = evt.target;
 	svg.addEventListener('mousedown', startDrag);
 	svg.addEventListener('mousemove', drag);
 	svg.addEventListener('mouseup', endDrag);
 	svg.addEventListener('mouseleave', endDrag);
+	svg.addEventListener('dblclick', selectElement);
+	function selectElement(evt) {
+		if (evt.target.id === selectedElementId) {
+			evt.target.removeAttribute('style');
+			selectedElementId = null;
+		} else {
+			selectedElementId = evt.target.id;
+			evt.target.style.outline = '1px solid blue';
+		}
+	}
+
 	function drag(evt) {
 		if (selectedElement) {
 			evt.preventDefault();
@@ -14,10 +25,16 @@ function makeDraggable(evt) {
 		}
 	}
 	function endDrag(evt) {
+		if (!selectedElementId) {
+			evt.target.removeAttribute('style');
+		}
 		selectedElement = null;
 	}
 	function startDrag(evt) {
 		if (evt.target.classList.contains('draggable')) {
+			let outlineStyle = '1px dashed lightgrey';
+			if (selectedElementId) outlineStyle = '1px solid blue';
+			evt.target.style.outline = outlineStyle;
 			selectedElement = evt.target;
 			offset = getMousePosition(evt);
 			// Get all the transforms currently on this element

@@ -76,14 +76,26 @@ function createPanel() {
 	var body = document.getElementsByTagName('BODY')[0];
 	const button = createButton('Paint', 'enablePainting');
 	const comment = createButton('Comment', 'btn-comment');
+	const deleteButton = createButton('Delete', 'btn-delete');
 	const div = createDiv('drawing', drawingStyles);
 	const shape = createDropdown('shape', shapeOptions);
 	const color = createDropdown('color', colorOptions);
+	const colorPicker = createColorPicker('color', colorOptions);
 	body.appendChild(button);
 	body.appendChild(div);
 	body.appendChild(shape);
 	body.appendChild(color);
 	body.appendChild(comment);
+	body.appendChild(deleteButton);
+	body.appendChild(colorPicker);
+}
+
+function createColorPicker(id, options) {
+	var input = document.createElement('input');
+	input.type = 'color';
+	input.value = '#ff0000';
+	input.id = id;
+	return input;
 }
 
 function applyGlobalStyles() {
