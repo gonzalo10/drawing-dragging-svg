@@ -88,6 +88,7 @@ function createPanel() {
 	body.appendChild(comment);
 	body.appendChild(deleteButton);
 	body.appendChild(colorPicker);
+	createColorPicker();
 }
 
 function createColorPicker(id, options) {
@@ -117,6 +118,77 @@ function applyGlobalStyles() {
 function init() {
 	createPanel();
 	applyGlobalStyles();
+}
+
+const mainStyleDiv = {
+	justifyContent: ' center',
+	boxShadow: '0 0 3px rgba(10,10,10,.2)',
+	// position: 'absolute',
+	width: '260px',
+	top: '55px',
+	left: 'calc(50% - 130px)',
+	display: 'flex',
+	flexWrap: 'wrap',
+	backgroundColor: '#fff',
+	borderRadius: '5px',
+	border: '1px solid #ccc',
+	zIndex: '2',
+	overflow: 'hidden',
+	maxHeight: '80vh',
+	overflowY: 'auto'
+};
+
+const lableStyle = {
+	position: 'relative',
+	cursor: 'pointer',
+	width: '50px',
+	height: '50px',
+	display: 'flex',
+	alignItems: 'center'
+};
+
+const spanStyle = color => ({
+	backgroundColor: color,
+	width: '40px',
+	height: '40px',
+	borderRadius: '30%'
+});
+
+const inputStyle = {
+	position: 'absolute',
+	opacity: '0',
+	top: '0',
+	left: '0',
+	width: '0',
+	height: '0'
+};
+
+const createColorItem = color => {
+	var label = document.createElement('label');
+	applyStyles(lableStyle, label);
+	var span = document.createElement('span');
+	applyStyles(spanStyle(color), span);
+	var input = document.createElement('input');
+	applyStyles(inputStyle, input);
+	span.appendChild(input);
+	label.appendChild(span);
+	return label;
+};
+
+function createColorPicker() {
+	var body = document.getElementsByTagName('BODY')[0];
+	const div = createDiv('mainDiv', mainStyleDiv);
+	const colorItemGreen = createColorItem('rgb(90, 233, 142)');
+	const colorItemYellow = createColorItem('rgb(247, 224, 0)');
+	const colorItemRed = createColorItem('rgb(247, 0, 0)');
+	const colorItemBlue = createColorItem('rgb(57, 201, 255)');
+	const colorItemBlack = createColorItem('rgb(0, 0, 0)');
+	div.appendChild(colorItemGreen);
+	div.appendChild(colorItemBlue);
+	div.appendChild(colorItemRed);
+	div.appendChild(colorItemYellow);
+	div.appendChild(colorItemBlack);
+	body.appendChild(div);
 }
 
 init();
