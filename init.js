@@ -15,8 +15,9 @@ feedbackButtonStyles = {
 	display: 'none'
 };
 
+let selectedColor = 'rgb(90, 233, 142)';
+
 const applyStyles = (styles, element) => {
-	console.log(element);
 	Object.keys(styles).forEach(style => {
 		element.style[style] = styles[style];
 	});
@@ -79,16 +80,14 @@ function createPanel() {
 	const deleteButton = createButton('Delete', 'btn-delete');
 	const div = createDiv('drawing', drawingStyles);
 	const shape = createDropdown('shape', shapeOptions);
-	const color = createDropdown('color', colorOptions);
-	const colorPicker = createColorPicker('color', colorOptions);
+	// const color = createDropdown('color', colorOptions);
+	createColorPicker();
 	body.appendChild(button);
 	body.appendChild(div);
 	body.appendChild(shape);
-	body.appendChild(color);
+	// body.appendChild(color);
 	body.appendChild(comment);
 	body.appendChild(deleteButton);
-	body.appendChild(colorPicker);
-	createColorPicker();
 }
 
 function createColorPicker(id, options) {
@@ -154,40 +153,47 @@ const spanStyle = color => ({
 	borderRadius: '30%'
 });
 
-const inputStyle = {
-	position: 'absolute',
-	opacity: '0',
-	top: '0',
-	left: '0',
-	width: '0',
-	height: '0'
-};
-
 const createColorItem = color => {
 	var label = document.createElement('label');
 	applyStyles(lableStyle, label);
 	var span = document.createElement('span');
 	applyStyles(spanStyle(color), span);
-	var input = document.createElement('input');
-	applyStyles(inputStyle, input);
-	span.appendChild(input);
 	label.appendChild(span);
+	label.id = color;
+	label.addEventListener('click', function(e) {
+		const pastColorSpan = document.getElementById(selectedColor).childNodes[0];
+		console.log(pastColorSpan);
+		pastColorSpan.style.border = '2px solid transparent';
+		selectedColor = e.currentTarget.id;
+		document.getElementById('colorPanelValue').value = selectedColor;
+		e.target.style.border = '2px solid blue';
+	});
 	return label;
+};
+const createColorInput = () => {
+	var input = document.createElement('input');
+	input.id = 'colorPanelValue';
+	input.type = 'text';
+	input.value = selectedColor;
+	applyStyles({ display: 'none' }, input);
+	return input;
 };
 
 function createColorPicker() {
 	var body = document.getElementsByTagName('BODY')[0];
-	const div = createDiv('mainDiv', mainStyleDiv);
+	const div = createDiv('colorPickerPanel', mainStyleDiv);
 	const colorItemGreen = createColorItem('rgb(90, 233, 142)');
 	const colorItemYellow = createColorItem('rgb(247, 224, 0)');
 	const colorItemRed = createColorItem('rgb(247, 0, 0)');
 	const colorItemBlue = createColorItem('rgb(57, 201, 255)');
 	const colorItemBlack = createColorItem('rgb(0, 0, 0)');
+	const colorInput = createColorInput();
 	div.appendChild(colorItemGreen);
 	div.appendChild(colorItemBlue);
 	div.appendChild(colorItemRed);
 	div.appendChild(colorItemYellow);
 	div.appendChild(colorItemBlack);
+	div.appendChild(colorInput);
 	body.appendChild(div);
 }
 

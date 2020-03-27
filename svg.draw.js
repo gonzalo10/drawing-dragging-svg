@@ -243,7 +243,6 @@
 // This is custom extension of line, polyline, polygon which doesn't draw the circle on the line.
 SVG.Element.prototype.draw.extend('line polyline polygon', {
 	init: function(e) {
-		console.log('init main');
 		this.set = new SVG.Set();
 
 		var p = this.startPoint,

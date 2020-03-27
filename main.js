@@ -39,7 +39,7 @@ enablePaintingButton.onclick = () => {
 
 const getDrawObject = () => {
 	shape = document.getElementById('shape').value;
-	const color = document.getElementById('color').value;
+	const color = document.getElementById('colorPanelValue').value;
 	const option = {
 		stroke: color,
 		'stroke-width': 2,
