@@ -1,0 +1,24 @@
+{
+	"name": "screen-draw",
+	"version": "1.0.0",
+	"description": "",
+	"main": "src/index.html",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"build": "webpack"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/gonzalo10/drawing-dragging-svg.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/gonzalo10/drawing-dragging-svg/issues"
+	},
+	"homepage": "https://github.com/gonzalo10/drawing-dragging-svg#readme",
+	"devDependencies": {
+		"webpack": "^4.42.1",
+		"webpack-cli": "^3.3.11"
+	}
+}

@@ -1,4 +1,6 @@
 const enablePaintingButton = document.querySelector('#enablePainting');
+const drawing = document.getElementById('drawing');
+console.log(drawing);
 const draw = SVG('drawing');
 const defs = draw.defs();
 draw.node.setAttribute('onload', 'makeDraggable(evt)');
@@ -28,6 +30,7 @@ const getArrowHead = defs => {
 getArrowHead(defs);
 
 enablePaintingButton.onclick = () => {
+	console.log('enablePaintingButton');
 	let activeColor = 'blue';
 	let buttonColor = 'white';
 	paintingenabled = !paintingenabled;

@@ -4,16 +4,6 @@ const drawingStyles = {
 	width: '100%',
 	height: '100%'
 };
-const static = {
-	cursor: 'not-allowed'
-};
-const draggable = {
-	cursor: 'move'
-};
-
-feedbackButtonStyles = {
-	display: 'none'
-};
 
 let selectedColor = 'rgb(90, 233, 142)';
 
@@ -34,7 +24,7 @@ function createButton(text, id, clickAction, styles) {
 	if (styles) {
 		applyStyles(styles, Button);
 	}
-	ButtonText = document.createTextNode(text);
+	const ButtonText = document.createTextNode(text);
 	Button.appendChild(ButtonText);
 	return Button;
 }
@@ -88,14 +78,6 @@ function createPanel() {
 	// body.appendChild(color);
 	body.appendChild(comment);
 	body.appendChild(deleteButton);
-}
-
-function createColorPicker(id, options) {
-	var input = document.createElement('input');
-	input.type = 'color';
-	input.value = '#ff0000';
-	input.id = id;
-	return input;
 }
 
 function applyGlobalStyles() {
@@ -197,4 +179,4 @@ function createColorPicker() {
 	body.appendChild(div);
 }
 
-init();
+export default init;
