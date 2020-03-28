@@ -1,6 +1,6 @@
 let selectedElementId;
 var selectedElement, offset;
-function makeDraggable(evt) {
+export function makeDraggable(evt) {
 	var svg = evt.target;
 	svg.addEventListener('mousedown', startDrag);
 	svg.addEventListener('mousemove', drag);
