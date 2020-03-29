@@ -3,9 +3,7 @@ export default function main() {
 	const enablePaintingButton = document.querySelector('#enablePainting');
 	const draw = SVG('drawing');
 	const defs = draw.defs();
-	// draw.node.setAttribute('onload', makeDraggable);
 	draw.node.onload = function(evt) {
-		console.log(evt);
 		makeDraggable(evt);
 	};
 	const shapes = [];

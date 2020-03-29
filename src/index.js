@@ -1,5 +1,4 @@
 import main from './main';
-import draggable from './draggable';
 import './svg.draw';
 import {
 	drawingStyles,
@@ -96,7 +95,6 @@ function init() {
 	createdrawingCanvas();
 	createPanel();
 	applyGlobalStyles();
-	draggable();
 	main();
 }
 

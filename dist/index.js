@@ -479,9 +479,7 @@ function main() {
 	const enablePaintingButton = document.querySelector('#enablePainting');
 	const draw = SVG('drawing');
 	const defs = draw.defs();
-	// draw.node.setAttribute('onload', makeDraggable);
 	draw.node.onload = function(evt) {
-		console.log(evt);
 		makeDraggable(evt);
 	};
 	const shapes = [];
@@ -709,7 +707,6 @@ const createHTMLElement = {
 
 
 
-
 let selectedColor = 'rgb(90, 233, 142)';
 
 function createPanel() {
@@ -796,7 +793,6 @@ function init() {
 	createdrawingCanvas();
 	createPanel();
 	applyGlobalStyles();
-	makeDraggable();
 	main();
 }
 
