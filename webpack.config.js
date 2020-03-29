@@ -9,5 +9,14 @@ module.exports = {
 	optimization: {
 		minimize: false // <---- disables uglify.
 		// minimizer: [new UglifyJsPlugin()] if you want to customize it.
+	},
+	module: {
+		rules: [
+			{
+				test: /\.html$/,
+				exclude: /node_modules/,
+				use: { loader: 'html-loader' }
+			}
+		]
 	}
 };

@@ -6,8 +6,15 @@ export const drawingStyles = {
 	background: 'transparent'
 };
 
+export const IconButtonStyles = {
+	border: '1px solid transparent',
+	padding: '0',
+	margin: '0',
+	cursor: 'pointer'
+};
+
 export const shapeOptions = {
-	'mouse paint': 'Mouse paint',
+	free_draw: 'Mouse paint',
 	rect: 'Rectangle',
 	ellipse: 'Circle',
 	line: 'Line',

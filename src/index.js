@@ -1,14 +1,15 @@
-import main from './main';
-import './svg.draw';
+import drawing from './drawing';
 import {
 	drawingStyles,
 	shapeOptions,
 	mainStyleDiv,
 	lableStyle,
 	spanStyle,
-	controlPanelStyle
+	controlPanelStyle,
+	IconButtonStyles
 } from './styles';
 import { applyStyles, createHTMLElement } from './helpers';
+const htmlFile = require('./colorPicker.html');
 let selectedColor = 'rgb(90, 233, 142)';
 
 function createPanel() {
@@ -18,12 +19,45 @@ function createPanel() {
 	const comment = createHTMLElement.button('Comment', 'btn-comment');
 	const deleteButton = createHTMLElement.button('Delete', 'btn-delete');
 	const shape = createHTMLElement.dropdown('shape', shapeOptions);
-	const colorPicker = createColorPicker();
-	controlPanel.appendChild(button);
-	controlPanel.appendChild(shape);
-	controlPanel.appendChild(comment);
-	controlPanel.appendChild(deleteButton);
-	controlPanel.appendChild(colorPicker);
+	const trashIcon = createHTMLElement.trashIcon();
+	const trashIconButton = createHTMLElement.iconButton(
+		'circleId',
+		trashIcon,
+		null,
+		IconButtonStyles
+	);
+	const commentIcon = createHTMLElement.commentIcon();
+	const commentIconButton = createHTMLElement.iconButton(
+		'circleId',
+		commentIcon,
+		null,
+		IconButtonStyles
+	);
+	const squareIcon = createHTMLElement.squareIcon();
+	const squareIconButton = createHTMLElement.iconButton(
+		'circleId',
+		squareIcon,
+		null,
+		IconButtonStyles
+	);
+	const circleIcon = createHTMLElement.circleIcon();
+	const circleIconButton = createHTMLElement.iconButton(
+		'circleId',
+		circleIcon,
+		null,
+		IconButtonStyles
+	);
+	// const colorPicker = createColorPicker();
+	// controlPanel.appendChild(button);
+	// controlPanel.appendChild(shape);
+	// controlPanel.appendChild(comment);
+	// controlPanel.appendChild(deleteButton);
+	// controlPanel.appendChild(colorPicker);
+	// controlPanel.appendChild(trashIconButton);
+	// controlPanel.appendChild(commentIconButton);
+	// controlPanel.appendChild(squareIconButton);
+	// controlPanel.appendChild(circleIconButton);
+	controlPanel.innerHTML = htmlFile;
 	body.appendChild(controlPanel);
 }
 
@@ -95,7 +129,7 @@ function init() {
 	createdrawingCanvas();
 	createPanel();
 	applyGlobalStyles();
-	main();
+	drawing();
 }
 
 init();
