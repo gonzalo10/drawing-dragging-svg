@@ -1,6 +1,8 @@
 let selectedElementId;
+let transform;
 var selectedElement, offset;
-export function makeDraggable(evt) {
+export default function makeDraggable(evt) {
+	if (!evt) return null;
 	var svg = evt.target;
 	svg.addEventListener('mousedown', startDrag);
 	svg.addEventListener('mousemove', drag);
@@ -44,6 +46,7 @@ export function makeDraggable(evt) {
 				transforms.length === 0 ||
 				transforms.getItem(0).type !== SVGTransform.SVG_TRANSFORM_TRANSLATE
 			) {
+				console.log('inside the if');
 				// Create an transform that translates by (0, 0)
 				var translate = svg.createSVGTransform();
 				translate.setTranslate(0, 0);

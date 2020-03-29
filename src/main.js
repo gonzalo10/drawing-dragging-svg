@@ -1,10 +1,13 @@
-import { makeDraggable } from './draggable';
+import makeDraggable from './draggable';
 export default function main() {
 	const enablePaintingButton = document.querySelector('#enablePainting');
-	console.log(SVG);
 	const draw = SVG('drawing');
 	const defs = draw.defs();
-	draw.node.setAttribute('onload', evt => makeDraggable(evt));
+	// draw.node.setAttribute('onload', makeDraggable);
+	draw.node.onload = function(evt) {
+		console.log(evt);
+		makeDraggable(evt);
+	};
 	const shapes = [];
 	let index = 0;
 	let shape;

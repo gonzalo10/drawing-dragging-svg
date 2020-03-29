@@ -404,8 +404,10 @@ __webpack_require__.r(__webpack_exports__);
 
 // CONCATENATED MODULE: ./src/draggable.js
 let selectedElementId;
+let transform;
 var selectedElement, offset;
 function makeDraggable(evt) {
+	if (!evt) return null;
 	var svg = evt.target;
 	svg.addEventListener('mousedown', startDrag);
 	svg.addEventListener('mousemove', drag);
@@ -449,6 +451,7 @@ function makeDraggable(evt) {
 				transforms.length === 0 ||
 				transforms.getItem(0).type !== SVGTransform.SVG_TRANSFORM_TRANSLATE
 			) {
+				console.log('inside the if');
 				// Create an transform that translates by (0, 0)
 				var translate = svg.createSVGTransform();
 				translate.setTranslate(0, 0);
@@ -474,10 +477,13 @@ function makeDraggable(evt) {
 
 function main() {
 	const enablePaintingButton = document.querySelector('#enablePainting');
-	console.log(SVG);
 	const draw = SVG('drawing');
 	const defs = draw.defs();
-	draw.node.setAttribute('onload', evt => makeDraggable(evt));
+	// draw.node.setAttribute('onload', makeDraggable);
+	draw.node.onload = function(evt) {
+		console.log(evt);
+		makeDraggable(evt);
+	};
 	const shapes = [];
 	let index = 0;
 	let shape;
@@ -703,6 +709,7 @@ const createHTMLElement = {
 
 
 
+
 let selectedColor = 'rgb(90, 233, 142)';
 
 function createPanel() {
@@ -789,6 +796,7 @@ function init() {
 	createdrawingCanvas();
 	createPanel();
 	applyGlobalStyles();
+	makeDraggable();
 	main();
 }
 
