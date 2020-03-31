@@ -9,6 +9,7 @@ import {
 	IconButtonStyles
 } from './styles';
 import { applyStyles, createHTMLElement } from './helpers';
+import takeScreenShot from './screen-shot';
 const htmlFile = require('./colorPicker.html');
 let selectedColor = 'rgb(90, 233, 142)';
 
@@ -130,6 +131,7 @@ function init() {
 	createPanel();
 	applyGlobalStyles();
 	drawing();
+	takeScreenShot();
 }
 
 init();
