@@ -399,7 +399,7 @@ SVG.Element.prototype.draw.extend('line polyline polygon', {
 /***/ (function(module, exports) {
 
 // Module
-var code = "<style>.annotate-heading{background-color:#3023ae;border-bottom-right-radius:4px;border-bottom-left-radius:4px;-webkit-box-shadow:inset 0 -1px 0 rgba(255,84,0,.12);box-shadow:inset 0 -1px 0 rgba(255,84,0,.12);cursor:default;color:#fff;display:-webkit-box;display:-ms-flexbox;display:flex;font-weight:600;padding:8px;position:absolute;left:50%;top:0;-webkit-transform:translateX(-50%);-ms-transform:translateX(-50%);transform:translateX(-50%);white-space:nowrap;z-index:1}.button_cancel{background-color:#c80428;color:#fff;width:45px;margin:0;padding:0;border:1px solid transparent;border-radius:5px}.button_confirm{background-color:#00ad37;color:#fff;width:45px;margin:0;padding:0;border:1px solid transparent;border-radius:5px}.toolbar{display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;margin-left:10px;margin-right:10px;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;z-index:10;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}.toolbar_item{position:relative;display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;padding:0 5px}.toolbar_button{border:2px solid transparent;color:#ddd;cursor:pointer;display:inline-block;font-size:22px;background:0 0;border-radius:5px;height:40px;outline:0;padding:3px;-webkit-transition:all .15s;-o-transition:all .15s;transition:all .15s;vertical-align:top;width:40px}.svg_icon{fill:#fff}.rotate_45{transform:rotate(-45deg)}</style> <div class=annotate-heading> <button class=\"button button_cancel\"> <div title=\"Delete screenshot\" name=ios-close-icon> <svg width=25 height=25 viewBox=\"0 0 512 512\" class=svg_icon> <path d=\"M133.1 128l23.6 290.7c0 16.2 13.1 29.3 29.3 29.3h141c16.2 0 29.3-13.1 29.3-29.3L379.6 128M194.7 393L188 160h18.5l6.9 233h-18.7zm70.3 0h-18V160h18v233zm52.3 0h-18.6l6.8-233H324l-6.7 233zM364 92h-36l-26.3-23c-3.7-3.2-8.4-5-13.2-5h-64.8c-4.9 0-9.7 1.8-13.4 5L184 92h-36c-17.6 0-30 8.4-30 26h276c0-17.6-12.4-26-30-26z\"></path> </svg> </div> </button> <nav class=toolbar> <div class=toolbar_item> <button type=button title=Undo disabled=disabled class=toolbar_button> <div title=Undo name=ios-undo-icon class=\"\"> <svg width=22 height=22 viewBox=\"0 0 512 512\" class=svg_icon> <path d=\"M479.9 394.9c0-19.6 4.2-97.1-56.8-158.7-40.4-40.7-91.9-61.7-163.4-65.5-2.1-.1-3.8-1.9-3.8-4V84c0-3.2-3.5-5.1-6.2-3.4L33.8 222.8c-2.4 1.6-2.4 5.1 0 6.7l215.9 142.2c2.7 1.8 6.2-.1 6.2-3.4v-81.6c0-2.3 1.9-4.1 4.2-4 44.1 1.7 69.5 10.9 97.1 23.2 36.1 16.2 72.9 50.9 94.5 83.5 13.1 19.9 19.2 33.9 21.4 39.7.7 1.7 2.3 2.8 4.1 2.8h2.9c-.1-11.7-.2-26.7-.2-37z\"></path> </svg> </div> <span class=toolbar__button__counter style=display:none>0</span> </button> </div> <div class=toolbar_item> <button id=enablePainting type=button title=Pencil class=\"toolbar_button is-active\"> <div title=Pencil name=md-create-icon class=\"\"> <svg viewBox=\"0 0 512 512\" width=22 height=22 class=svg_icon> <path d=\"M64 368v80h80l235.727-235.729-79.999-79.998L64 368zm377.602-217.602c8.531-8.531 8.531-21.334 0-29.865l-50.135-50.135c-8.531-8.531-21.334-8.531-29.865 0l-39.468 39.469 79.999 79.998 39.469-39.467z\"></path> </svg> </div> </button> </div> <div class=toolbar_item> <button type=button title=Arrow class=toolbar_button> <div title=Arrow name=md-arrow-forward-icon class=rotate_45> <svg viewBox=\"0 0 512 512\" width=26 height=26 class=svg_icon> <path d=\"M85 277.375h259.704L225.002 397.077 256 427l171-171L256 85l-29.922 29.924 118.626 119.701H85v42.75z\"></path> </svg> </div> </button> </div> <div class=toolbar_item> <button type=button title=Rectangle class=toolbar_button> <div title=Rectangle name=md-square-outline-icon class=\"\"> <svg width=22 height=22 viewBox=\"0 0 512 512\" class=svg_icon> <path d=\"M405.3 106.7v298.7H106.7V106.7h298.6m0-42.7H106.7C83.2 64 64 83.2 64 106.7v298.7c0 23.5 19.2 42.7 42.7 42.7h298.7c23.5 0 42.7-19.2 42.7-42.7V106.7C448 83.2 428.8 64 405.3 64z\"></path> </svg> </div> </button> </div> <div class=toolbar_item> <button type=button title=\"Color picker\" class=toolbar_button> <div title=\"Color picker\" name=md-color-palette-icon class=\"\"> <svg viewBox=\"0 0 512 512\" width=22 height=22 class=svg_icon> <path d=\"M256 64C150.401 64 64 150.401 64 256c0 105.604 86.401 192 192 192 18.136 0 32-13.864 32-32 0-8.531-3.198-16-8.531-21.333-5.333-5.334-8.531-12.803-8.531-21.334 0-18.135 13.864-32 32-32h38.396c58.667 0 106.667-48 106.667-106.666C448 140.802 361.604 64 256 64zM138.667 256c-18.136 0-32-13.864-32-32s13.864-32 32-32c18.135 0 32 13.864 32 32s-13.865 32-32 32zm64-85.333c-18.136 0-32-13.865-32-32 0-18.136 13.864-32 32-32 18.135 0 32 13.864 32 32 0 18.135-13.865 32-32 32zm106.666 0c-18.135 0-32-13.865-32-32 0-18.136 13.865-32 32-32 18.136 0 32 13.864 32 32 0 18.135-13.864 32-32 32zm64 85.333c-18.135 0-32-13.864-32-32s13.865-32 32-32c18.136 0 32 13.864 32 32s-13.864 32-32 32z\"></path> </svg> </div> <span class=current-color style=background-color:#f70000></span> </button> <div class=\"dropdown color-picker\" style=display:none> <label class=color-picker__item><span style=background-color:#5ae98e><input type=radio name=color value=#5AE98E /></span></label><label class=color-picker__item><span style=background-color:#f70000><input type=radio name=color value=#f70000 /></span></label><label class=color-picker__item><span style=background-color:#f7e000><input type=radio name=color value=#f7e000 /></span></label><label class=color-picker__item><span style=background-color:#39c9ff><input type=radio name=color value=#39C9FF /></span></label><label class=color-picker__item><span style=background-color:#172330><input type=radio name=color value=#172330 /></span></label> </div> </div> </nav> <button class=button_confirm> <div title=Listo name=ios-checkmark-icon class=\"\"> <svg width=40 height=40 viewBox=\"0 0 512 512\" class=svg_icon> <path d=\"M362.6 192.9L345 174.8c-.7-.8-1.8-1.2-2.8-1.2-1.1 0-2.1.4-2.8 1.2l-122 122.9-44.4-44.4c-.8-.8-1.8-1.2-2.8-1.2-1 0-2 .4-2.8 1.2l-17.8 17.8c-1.6 1.6-1.6 4.1 0 5.7l56 56c3.6 3.6 8 5.7 11.7 5.7 5.3 0 9.9-3.9 11.6-5.5h.1l133.7-134.4c1.4-1.7 1.4-4.2-.1-5.7z\"></path> </svg> </div> </button> </div> ";
+var code = "<style>.annotate-heading{background-color:#3023ae;border-bottom-right-radius:4px;border-bottom-left-radius:4px;-webkit-box-shadow:inset 0 -1px 0 rgba(255,84,0,.12);box-shadow:inset 0 -1px 0 rgba(255,84,0,.12);cursor:default;color:#fff;display:-webkit-box;display:-ms-flexbox;display:flex;font-weight:600;padding:8px;position:absolute;left:50%;top:0;-webkit-transform:translateX(-50%);-ms-transform:translateX(-50%);transform:translateX(-50%);white-space:nowrap;z-index:1}.button_cancel{background-color:#c80428;color:#fff;width:45px;margin:0;padding:0;border:1px solid transparent;border-radius:5px}.button_confirm{background-color:#00ad37;color:#fff;width:45px;margin:0;padding:0;border:1px solid transparent;border-radius:5px}.toolbar{display:inline-flex;margin-left:10px;margin-right:10px;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;z-index:10;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}.toolbar_item{position:relative;display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;padding:0 5px}.toolbar_button{border:2px solid transparent;color:#ddd;cursor:pointer;display:inline-block;font-size:22px;background:0 0;border-radius:5px;height:40px;outline:0;padding:3px;-webkit-transition:all .15s;-o-transition:all .15s;transition:all .15s;vertical-align:top;width:40px}.toolbar_button:hover{border:2px solid #fff}.toolbar_button>.color_picker_item_current_color{position:absolute;bottom:6px;right:10px;width:9px;height:9px;border-radius:50%}.toolbar_button_content{display:flex;justify-content:center}.svg_icon{fill:#fff}.rotate_45{transform:rotate(-45deg)}.dropdown_color_picker{box-shadow:0 0 3px rgba(10,10,10,.2);position:absolute;width:260px;top:55px;left:calc(50% - 130px);display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;background-color:#fff;border-radius:5px;border:1px solid #ccc;z-index:2;overflow:hidden;max-height:80vh;overflow-y:auto}.color_picker_item{position:relative;display:inline-block;cursor:pointer;width:50px;height:50px;display:flex;align-items:center;justify-content:center}.color_picker_item>span{display:block;width:30px;height:30px;background-color:#fff;border-radius:20%}.color_picker_item input{position:absolute;opacity:0;top:0;left:0;width:0;height:0}</style> <div class=annotate-heading> <button class=\"button button_cancel\"> <div title=\"Delete screenshot\" name=ios-close-icon> <svg width=25 height=25 viewBox=\"0 0 512 512\" class=svg_icon> <path d=\"M133.1 128l23.6 290.7c0 16.2 13.1 29.3 29.3 29.3h141c16.2 0 29.3-13.1 29.3-29.3L379.6 128M194.7 393L188 160h18.5l6.9 233h-18.7zm70.3 0h-18V160h18v233zm52.3 0h-18.6l6.8-233H324l-6.7 233zM364 92h-36l-26.3-23c-3.7-3.2-8.4-5-13.2-5h-64.8c-4.9 0-9.7 1.8-13.4 5L184 92h-36c-17.6 0-30 8.4-30 26h276c0-17.6-12.4-26-30-26z\"></path> </svg> </div> </button> <nav class=toolbar> <div class=toolbar_item> <button type=button title=Undo disabled=disabled class=toolbar_button> <div title=Undo class=toolbar_button_content> <svg width=22 height=22 viewBox=\"0 0 512 512\" class=svg_icon> <path d=\"M479.9 394.9c0-19.6 4.2-97.1-56.8-158.7-40.4-40.7-91.9-61.7-163.4-65.5-2.1-.1-3.8-1.9-3.8-4V84c0-3.2-3.5-5.1-6.2-3.4L33.8 222.8c-2.4 1.6-2.4 5.1 0 6.7l215.9 142.2c2.7 1.8 6.2-.1 6.2-3.4v-81.6c0-2.3 1.9-4.1 4.2-4 44.1 1.7 69.5 10.9 97.1 23.2 36.1 16.2 72.9 50.9 94.5 83.5 13.1 19.9 19.2 33.9 21.4 39.7.7 1.7 2.3 2.8 4.1 2.8h2.9c-.1-11.7-.2-26.7-.2-37z\"></path> </svg> </div> <span class=toolbar__button__counter style=display:none>0</span> </button> </div> <div class=toolbar_item> <button id=free_draw_button type=button title=Pencil class=\"toolbar_button is-active\"> <div title=Pencil class=toolbar_button_content> <svg viewBox=\"0 0 512 512\" width=22 height=22 class=svg_icon> <path d=\"M64 368v80h80l235.727-235.729-79.999-79.998L64 368zm377.602-217.602c8.531-8.531 8.531-21.334 0-29.865l-50.135-50.135c-8.531-8.531-21.334-8.531-29.865 0l-39.468 39.469 79.999 79.998 39.469-39.467z\"></path> </svg> </div> </button> </div> <div class=toolbar_item> <button id=arrow_draw_button type=button title=Arrow class=toolbar_button> <div title=Arrow class=\"toolbar_button_content rotate_45\"> <svg viewBox=\"0 0 512 512\" width=26 height=26 class=svg_icon> <path d=\"M85 277.375h259.704L225.002 397.077 256 427l171-171L256 85l-29.922 29.924 118.626 119.701H85v42.75z\"></path> </svg> </div> </button> </div> <div class=toolbar_item> <button id=rec_draw_button type=button title=Rectangle class=toolbar_button> <div class=toolbar_button_content title=Rectangle> <svg width=22 height=22 viewBox=\"0 0 512 512\" class=svg_icon> <path d=\"M405.3 106.7v298.7H106.7V106.7h298.6m0-42.7H106.7C83.2 64 64 83.2 64 106.7v298.7c0 23.5 19.2 42.7 42.7 42.7h298.7c23.5 0 42.7-19.2 42.7-42.7V106.7C448 83.2 428.8 64 405.3 64z\"></path> </svg> </div> </button> </div> <div class=toolbar_item> <button id=color_picker_button type=button title=\"Color picker\" class=toolbar_button> <div class=toolbar_button_content title=\"Color picker\"> <svg viewBox=\"0 0 512 512\" width=22 height=22 class=svg_icon> <path d=\"M256 64C150.401 64 64 150.401 64 256c0 105.604 86.401 192 192 192 18.136 0 32-13.864 32-32 0-8.531-3.198-16-8.531-21.333-5.333-5.334-8.531-12.803-8.531-21.334 0-18.135 13.864-32 32-32h38.396c58.667 0 106.667-48 106.667-106.666C448 140.802 361.604 64 256 64zM138.667 256c-18.136 0-32-13.864-32-32s13.864-32 32-32c18.135 0 32 13.864 32 32s-13.865 32-32 32zm64-85.333c-18.136 0-32-13.865-32-32 0-18.136 13.864-32 32-32 18.135 0 32 13.864 32 32 0 18.135-13.865 32-32 32zm106.666 0c-18.135 0-32-13.865-32-32 0-18.136 13.865-32 32-32 18.136 0 32 13.864 32 32 0 18.135-13.864 32-32 32zm64 85.333c-18.135 0-32-13.864-32-32s13.865-32 32-32c18.136 0 32 13.864 32 32s-13.864 32-32 32z\"></path> </svg> </div> <span id=color_picker_bubble class=color_picker_item_current_color style=background-color:#f70000></span> </button> <div id=color_picker_dropdown class=dropdown_color_picker style=display:none> <label class=color_picker_item><span style=background-color:#5ae98e><input type=radio name=color value=#5AE98E /></span></label><label class=color_picker_item><span style=background-color:#f70000><input type=radio name=color value=#f70000 /></span></label><label class=color_picker_item><span style=background-color:#f7e000><input type=radio name=color value=#f7e000 /></span></label><label class=color_picker_item><span style=background-color:#39c9ff><input type=radio name=color value=#39C9FF /></span></label><label class=color_picker_item><span style=background-color:#172330><input type=radio name=color value=#172330 /></span></label> </div> </div> </nav> <button class=button_confirm> <div title=Listo name=ios-checkmark-icon class=\"\"> <svg width=40 height=40 viewBox=\"0 0 512 512\" class=svg_icon> <path d=\"M362.6 192.9L345 174.8c-.7-.8-1.8-1.2-2.8-1.2-1.1 0-2.1.4-2.8 1.2l-122 122.9-44.4-44.4c-.8-.8-1.8-1.2-2.8-1.2-1 0-2 .4-2.8 1.2l-17.8 17.8c-1.6 1.6-1.6 4.1 0 5.7l56 56c3.6 3.6 8 5.7 11.7 5.7 5.3 0 9.9-3.9 11.6-5.5h.1l133.7-134.4c1.4-1.7 1.4-4.2-.1-5.7z\"></path> </svg> </div> </button> </div> ";
 // Exports
 module.exports = code;
 
@@ -487,47 +487,102 @@ function makeDraggable(evt) {
 // CONCATENATED MODULE: ./src/drawing.js
 
 
+const RECT = 'rect';
+const ARROW = 'arrow';
+const FREE_DRAW = 'free_draw';
+const CIRCLE = 'circle';
+
 let draw;
 let defs;
-let enablePaintingButton;
 const shapes = [];
 let index = 0;
 let drawing_shape;
-let paintingenabled = false;
+let selctedShape = null;
+let prevShapeButton = null;
+
+let drawing_color;
+
+let activeStyleStateButton = '2px solid white';
+const handleSelectShape = (newShape, button) => {
+	if (selctedShape === newShape) {
+		button.style.border = '';
+		selctedShape = null;
+		prevShapeButton = button;
+		return;
+	}
+	prevShapeButton.style.border = '';
+	button.style.border = activeStyleStateButton;
+	selctedShape = newShape;
+	prevShapeButton = button;
+	return;
+};
+
+const setInitialStateShape = initialButton => {
+	selctedShape = FREE_DRAW;
+	prevShapeButton = initialButton;
+	initialButton.style.border = activeStyleStateButton;
+};
+
+const shapeEventListeners = () => {
+	const free_drawButton = document.querySelector('#free_draw_button');
+	const rect_drawButton = document.querySelector('#rec_draw_button');
+	const arrow_drawButton = document.querySelector('#arrow_draw_button');
+	const colorPickerButton = document.querySelector('#color_picker_button');
+	setInitialStateShape(free_drawButton);
+
+	rect_drawButton.onclick = () => {
+		handleSelectShape(RECT, rect_drawButton);
+	};
+	free_drawButton.onclick = () => {
+		handleSelectShape(FREE_DRAW, free_drawButton);
+	};
+	arrow_drawButton.onclick = () => {
+		handleSelectShape(ARROW, arrow_drawButton);
+	};
+	colorPickerButton.onclick = () => {
+		const dropdown = document.getElementById('color_picker_dropdown');
+		const dropdownState = dropdown.style.display;
+		if (dropdownState === 'none') {
+			dropdown.style.display = '';
+		} else {
+			dropdown.style.display = 'none';
+		}
+	};
+	const colorPickerItemSelected = document.getElementsByClassName(
+		'color_picker_item'
+	);
+	for (var i = 0; i < colorPickerItemSelected.length; i++) {
+		colorPickerItemSelected[i].onclick = e => {
+			drawing_color = e.target.value;
+			const dropdown = document.getElementById('color_picker_dropdown');
+			dropdown.style.display = 'none';
+			const colorBubble = document.getElementById('color_picker_bubble');
+			colorBubble.style.backgroundColor = e.target.value;
+		};
+	}
+};
+
 function drawing() {
-	enablePaintingButton = document.querySelector('#enablePainting');
+	shapeEventListeners();
 	draw = SVG('drawing');
 	defs = draw.defs();
 	draw.node.onload = function(evt) {
 		makeDraggable(evt);
 	};
 	getArrowHead(defs);
-	enablePaintingButton.onclick = () =>
-		hanldePaintingButtonClick(enablePaintingButton);
+
 	draw.on('mousedown', event => handleMouseDown(event));
 	draw.on('mousemove', event => handleMouseMove(event));
 	draw.on('mouseup', event => handleMouseUp(event));
 }
 
-const hanldePaintingButtonClick = () => {
-	let activeColor = 'blue';
-	let buttonColor = 'white';
-	paintingenabled = !paintingenabled;
-	if (paintingenabled) {
-		buttonColor = activeColor;
-	}
-	enablePaintingButton.style.backgroundColor = buttonColor;
-};
-
 const getDrawObject = () => {
-	// shape = document.getElementById('shape').value;
-	if (!drawing_shape) drawing_shape = 'free_draw';
-	let color;
-	// const color = document.getElementById('colorPanelValue').value;
-	if (!color) color = 'black';
+	drawing_shape = selctedShape;
+	if (!drawing_shape) return null;
+	if (!drawing_color) drawing_color = 'black';
 	const option = {
-		stroke: color,
-		'stroke-width': 2,
+		stroke: drawing_color,
+		'stroke-width': 4,
 		'fill-opacity': 0
 	};
 
@@ -538,7 +593,7 @@ const getDrawObject = () => {
 			return draw.ellipse().attr(option);
 		case 'rect':
 			return draw.rect().attr(option);
-		case 'line':
+		case 'arrow':
 			return draw.line().attr(option);
 		case 'dark_square':
 			return draw.rect().attr(option);
@@ -547,7 +602,7 @@ const getDrawObject = () => {
 };
 
 const handleMouseUp = event => {
-	if (!paintingenabled) return null;
+	if (!selctedShape) return null;
 	if (drawing_shape === 'free_draw') {
 		shapes[index].draw('stop', event);
 	} else if (drawing_shape === 'line') {
@@ -565,14 +620,14 @@ const handleMouseUp = event => {
 };
 
 const handleMouseMove = event => {
-	if (!paintingenabled) return null;
+	if (!selctedShape) return null;
 	if (drawing_shape === 'free_draw' && shapes[index]) {
 		shapes[index].draw('point', event);
 	}
 };
 
 const handleMouseDown = event => {
-	if (!paintingenabled) return null;
+	if (!selctedShape) return null;
 	const shape = getDrawObject();
 	shape.node.setAttribute('class', 'draggable');
 	shapes[index] = shape;

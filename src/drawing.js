@@ -1,46 +1,101 @@
 import './libs/svg.draw';
 import makeDraggable from './dragging';
+const RECT = 'rect';
+const ARROW = 'arrow';
+const FREE_DRAW = 'free_draw';
+const CIRCLE = 'circle';
+
 let draw;
 let defs;
-let enablePaintingButton;
 const shapes = [];
 let index = 0;
 let shape;
-let paintingenabled = false;
+let selctedShape = null;
+let prevShapeButton = null;
+
+let color;
+
+let activeStyleStateButton = '2px solid white';
+const handleSelectShape = (newShape, button) => {
+	if (selctedShape === newShape) {
+		button.style.border = '';
+		selctedShape = null;
+		prevShapeButton = button;
+		return;
+	}
+	prevShapeButton.style.border = '';
+	button.style.border = activeStyleStateButton;
+	selctedShape = newShape;
+	prevShapeButton = button;
+	return;
+};
+
+const setInitialStateShape = initialButton => {
+	selctedShape = FREE_DRAW;
+	prevShapeButton = initialButton;
+	initialButton.style.border = activeStyleStateButton;
+};
+
+const shapeEventListeners = () => {
+	const free_drawButton = document.querySelector('#free_draw_button');
+	const rect_drawButton = document.querySelector('#rec_draw_button');
+	const arrow_drawButton = document.querySelector('#arrow_draw_button');
+	const colorPickerButton = document.querySelector('#color_picker_button');
+	setInitialStateShape(free_drawButton);
+
+	rect_drawButton.onclick = () => {
+		handleSelectShape(RECT, rect_drawButton);
+	};
+	free_drawButton.onclick = () => {
+		handleSelectShape(FREE_DRAW, free_drawButton);
+	};
+	arrow_drawButton.onclick = () => {
+		handleSelectShape(ARROW, arrow_drawButton);
+	};
+	colorPickerButton.onclick = () => {
+		const dropdown = document.getElementById('color_picker_dropdown');
+		const dropdownState = dropdown.style.display;
+		if (dropdownState === 'none') {
+			dropdown.style.display = '';
+		} else {
+			dropdown.style.display = 'none';
+		}
+	};
+	const colorPickerItemSelected = document.getElementsByClassName(
+		'color_picker_item'
+	);
+	for (var i = 0; i < colorPickerItemSelected.length; i++) {
+		colorPickerItemSelected[i].onclick = e => {
+			color = e.target.value;
+			const dropdown = document.getElementById('color_picker_dropdown');
+			dropdown.style.display = 'none';
+			const colorBubble = document.getElementById('color_picker_bubble');
+			colorBubble.style.backgroundColor = e.target.value;
+		};
+	}
+};
+
 export default function drawing() {
-	enablePaintingButton = document.querySelector('#enablePainting');
+	shapeEventListeners();
 	draw = SVG('drawing');
 	defs = draw.defs();
 	draw.node.onload = function(evt) {
 		makeDraggable(evt);
 	};
 	getArrowHead(defs);
-	enablePaintingButton.onclick = () =>
-		hanldePaintingButtonClick(enablePaintingButton);
+
 	draw.on('mousedown', event => handleMouseDown(event));
 	draw.on('mousemove', event => handleMouseMove(event));
 	draw.on('mouseup', event => handleMouseUp(event));
 }
 
-const hanldePaintingButtonClick = () => {
-	let activeColor = 'blue';
-	let buttonColor = 'white';
-	paintingenabled = !paintingenabled;
-	if (paintingenabled) {
-		buttonColor = activeColor;
-	}
-	enablePaintingButton.style.backgroundColor = buttonColor;
-};
-
 const getDrawObject = () => {
-	// shape = document.getElementById('shape').value;
-	if (!shape) shape = 'free_draw';
-	let color;
-	// const color = document.getElementById('colorPanelValue').value;
+	shape = selctedShape;
+	if (!shape) return null;
 	if (!color) color = 'black';
 	const option = {
 		stroke: color,
-		'stroke-width': 2,
+		'stroke-width': 4,
 		'fill-opacity': 0
 	};
 
@@ -51,7 +106,7 @@ const getDrawObject = () => {
 			return draw.ellipse().attr(option);
 		case 'rect':
 			return draw.rect().attr(option);
-		case 'line':
+		case 'arrow':
 			return draw.line().attr(option);
 		case 'dark_square':
 			return draw.rect().attr(option);
@@ -60,7 +115,7 @@ const getDrawObject = () => {
 };
 
 const handleMouseUp = event => {
-	if (!paintingenabled) return null;
+	if (!selctedShape) return null;
 	if (shape === 'free_draw') {
 		shapes[index].draw('stop', event);
 	} else if (shape === 'line') {
@@ -78,14 +133,14 @@ const handleMouseUp = event => {
 };
 
 const handleMouseMove = event => {
-	if (!paintingenabled) return null;
+	if (!selctedShape) return null;
 	if (shape === 'free_draw' && shapes[index]) {
 		shapes[index].draw('point', event);
 	}
 };
 
 const handleMouseDown = event => {
-	if (!paintingenabled) return null;
+	if (!selctedShape) return null;
 	const shape = getDrawObject();
 	shape.node.setAttribute('class', 'draggable');
 	shapes[index] = shape;
