@@ -57,7 +57,7 @@ export const spanStyle = color => ({
 });
 
 export const controlPanelStyle = {
-	position: 'absolute',
+	position: 'fixed',
 	top: 0,
 	left: '50%',
 	transform: 'translate(-50%)'
