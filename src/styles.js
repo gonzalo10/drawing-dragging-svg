@@ -57,11 +57,8 @@ export const spanStyle = color => ({
 });
 
 export const controlPanelStyle = {
-	width: 'auto',
-	justifyContent: 'center',
-	display: 'flex',
-	alignItems: 'center',
 	position: 'absolute',
+	top: 0,
 	left: '50%',
 	transform: 'translate(-50%)'
 };
